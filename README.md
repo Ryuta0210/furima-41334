@@ -1,6 +1,6 @@
-#テーブル設計
+# テーブル設計
 
-##Usersテーブル
+## Usersテーブル
 | Column              | Type      | Options                  |
 |---------------------|-----------|--------------------------|
 | email               | string    | null:false, unique:true  |
@@ -13,51 +13,51 @@
 | birth_day           | date      | null:false               |
 
 
-###Association
+### Association
 has_many :purchases
 has_many :items
 
 
-##Itemsテーブル
-| Column              | Type      | Options                 |
-|---------------------|-----------|-------------------------|
-| name                | string    | null:false              |
-| category_id         | integer   | null:false              |
-| description         | text      | null:false              |
-| status_id           | integer   | null:false              |
-| shipping_cost_id    | integer   | null:false              |
-| prefecture_id       | integer   | null:false              |
-| delivery_schedule_id| integer   | null:false              |
-| price               | string    | null:false              |
-| user                | references| null:false, foreign_key |
+## Itemsテーブル
+| Column              | Type      | Options                      |
+|---------------------|-----------|------------------------------|
+| name                | string    | null:false                   |
+| category_id         | integer   | null:false                   |
+| description         | text      | null:false                   |
+| status_id           | integer   | null:false                   |
+| shipping_cost_id    | integer   | null:false                   |
+| prefecture_id       | integer   | null:false                   |
+| delivery_schedule_id| integer   | null:false                   |
+| price               | integer   | null:false                   |
+| user                | references| null:false, foreign_key:true |
 
-###Association
+### Association
 has_one :purchase
 belongs_to :user
 
 
-##purchasesテーブル
-| Column              | Type      | Options                  |
-|---------------------|-----------|--------------------------|
-| item                | references| null:false, foreign_key  |
-| user                | references| null:false, foreign_key  |
+## Purchasesテーブル
+| Column              | Type      | Options                       |
+|---------------------|-----------|-------------------------------|
+| item                | references| null:false, foreign_key:true  |
+| user                | references| null:false, foreign_key:true  |
 
-###Association
+### Association
 has_one :destination
 belongs_to :item
 belongs_to :user
 
 
-##destinationsテーブル
-| Column              | Type      | Options                  |
-|---------------------|-----------|--------------------------|
-| post_code           | string    | null:false               |
-| prefecture_id       | integer   | null:false               |
-| city                | string    | null:false               |
-| street              | string    | null:false               |
-| building            | string    | null:false               |
-| phone               | string    | null:false               |
-| purchase            | references| null:false, foreign_key  |
+## Destinationsテーブル
+| Column              | Type      | Options                       |
+|---------------------|-----------|-------------------------------|
+| post_code           | string    | null:false                    |
+| prefecture_id       | integer   | null:false                    |
+| city                | string    | null:false                    |
+| street              | string    | null:false                    |
+| building            | string    |                               |
+| phone               | string    | null:false                    |
+| purchase            | references| null:false, foreign_key:true  |
 
-###Association
+### Association
 belongs_to :purchase
