@@ -11,7 +11,6 @@
 | first_kana_name     | string    | null:false               |
 | family_kana_name    | string    | null:false               |
 | birth_day           | date      | null:false               |
-| item                | reference | null:false, foreign_key  |
 
 
 ###Association
@@ -30,18 +29,18 @@ has_many :items
 | prefecture_id       | integer   | null:false              |
 | delivery_schedule_id| integer   | null:false              |
 | price               | string    | null:false              |
-| user                | reference | null:false, foreign_key |
+| user                | references| null:false, foreign_key |
 
 ###Association
-has_many :purchases
+has_one :purchase
 belongs_to :user
 
 
 ##purchasesテーブル
 | Column              | Type      | Options                  |
 |---------------------|-----------|--------------------------|
-| item                | reference | null:false, foreign_key  |
-| user                | reference | null:false, foreign_key  |
+| item                | references| null:false, foreign_key  |
+| user                | references| null:false, foreign_key  |
 
 ###Association
 has_one :destination
@@ -52,12 +51,13 @@ belongs_to :user
 ##destinationsテーブル
 | Column              | Type      | Options                  |
 |---------------------|-----------|--------------------------|
-| post_code           | integer   | null:false               |
+| post_code           | string    | null:false               |
 | prefecture_id       | integer   | null:false               |
 | city                | string    | null:false               |
 | street              | string    | null:false               |
 | building            | string    | null:false               |
-| phone               | integer   | null:false               |
+| phone               | string    | null:false               |
+| purchase            | references| null:false, foreign_key  |
 
 ###Association
 belongs_to :purchase
