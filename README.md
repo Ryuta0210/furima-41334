@@ -1,44 +1,47 @@
 #テーブル設計
 
-##Userテーブル
-| Column              | Type    | Options           |
-|---------------------|---------|-------------------|
-| email               | string  | not null, unique  |
-| encrypted_password  | string  | not null          |
-| nickname            | string  | not null          |
-| first_name          | string  | not null          |
-| family_name         | string  | not null          |
-| first_kana_name     | string  | not null          |
-| family_kana_name    | string  | not null          |
-| birth_day           | date    | not null          |
+##Usersテーブル
+| Column              | Type      | Options                  |
+|---------------------|-----------|--------------------------|
+| email               | string    | null:false, unique:true  |
+| encrypted_password  | string    | null:false               |
+| nickname            | string    | null:false               |
+| first_name          | string    | null:false               |
+| family_name         | string    | null:false               |
+| first_kana_name     | string    | null:false               |
+| family_kana_name    | string    | null:false               |
+| birth_day           | date      | null:false               |
+| item                | reference | null:false, foreign_key  |
+
 
 ###Association
 has_many :purchases
+has_many :items
 
 
-##Itemテーブル
-| Column              | Type      | Options               |
-|---------------------|-----------|-----------------------|
-| name                | string    | not null              |
-| category            | string    | not null              |
-| description         | text      | not null              |
-| status              | string    | not null              |
-| shipping_cost       | string    | not null              |
-| origin              | string    | not null              |
-| delivery_schedule   | string    | not null              |
-| price               | string    | not null              |
+##Itemsテーブル
+| Column              | Type      | Options                 |
+|---------------------|-----------|-------------------------|
+| name                | string    | null:false              |
+| category_id         | integer   | null:false              |
+| description         | text      | null:false              |
+| status_id           | integer   | null:false              |
+| shipping_cost_id    | integer   | null:false              |
+| prefecture_id       | integer   | null:false              |
+| delivery_schedule_id| integer   | null:false              |
+| price               | string    | null:false              |
+| user                | reference | null:false, foreign_key |
 
 ###Association
 has_many :purchases
+belongs_to :user
 
 
-##purchaseテーブル
-| Column              | Type      | Options                |
-|---------------------|-----------|------------------------|
-| credit_card         | string    | not null               |
-| destination         | reference | not null, foreign_key  |
-| item                | reference | not null, foreign_key  |
-| user                | reference | not null, foreign_key  |
+##purchasesテーブル
+| Column              | Type      | Options                  |
+|---------------------|-----------|--------------------------|
+| item                | reference | null:false, foreign_key  |
+| user                | reference | null:false, foreign_key  |
 
 ###Association
 has_one :destination
@@ -46,15 +49,15 @@ belongs_to :item
 belongs_to :user
 
 
-##destinationテーブル
-| Column              | Type      | Options                |
-|---------------------|-----------|------------------------|
-| post_code           | integer   | not null               |
-| prefecture          | string    | not null               |
-| city                | string    | not null               |
-| street              | string    | not null               |
-| building            | string    | not null               |
-| phone               | integer   | not null               |
+##destinationsテーブル
+| Column              | Type      | Options                  |
+|---------------------|-----------|--------------------------|
+| post_code           | integer   | null:false               |
+| prefecture_id       | integer   | null:false               |
+| city                | string    | null:false               |
+| street              | string    | null:false               |
+| building            | string    | null:false               |
+| phone               | integer   | null:false               |
 
 ###Association
 belongs_to :purchase
