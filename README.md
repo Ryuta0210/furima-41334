@@ -1,24 +1,76 @@
-# README
+#テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Userテーブル
+| Column              | Type    | Options           |
+|---------------------|---------|-------------------|
+| email               | string  | not null, unique  |
+| encrypted_password  | string  | not null          |
 
-Things you may want to cover:
+###Association
+has_many :purchases
+has_one :profile
 
-* Ruby version
 
-* System dependencies
+##Profileテーブル
+| Column              | Type      | Options               |
+|---------------------|-----------|-----------------------|
+| nickname            | string    | not null              |
+| first_name          | string    | not null              |
+| family_name         | string    | not null              |
+| first_kana_name     | string    | not null              |
+| family_kana_name    | string    | not null              |
+| birth_day           | date      | not null              |
+| user                | reference | not null, foreign_key |
 
-* Configuration
+###Association
+belongs_to :user
 
-* Database creation
 
-* Database initialization
+##Itemテーブル
+| Column              | Type      | Options               |
+|---------------------|-----------|-----------------------|
+| name                | string    | not null              |
+| description         | text      | not null              |
+| status              | string    | not null              |
+| shipping_cost       | string    | not null              |
+| origin              | string    | not null              |
+| delivery_schedule   | string    | not null              |
+| price               | string    | not null              |
+| category            | reference | not null, foreign_key |
 
-* How to run the test suite
+###Association
+has_many :purchases
+belongs_to :category
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+##Categoryテーブル
+| Column              | Type      | Options           |
+|---------------------|-----------|-------------------|
+| name                | string    | not null          |
 
-* ...
+###Association
+has_many :items
+
+
+##purchaseテーブル
+| Column              | Type      | Options                |
+|---------------------|-----------|------------------------|
+| credit_card         | string    | not null               |
+| destination         | reference | not null, foreign_key  |
+
+###Association
+has_one :destination
+
+
+##destinationテーブル
+| Column              | Type      | Options                |
+|---------------------|-----------|------------------------|
+| post_code           | integer   | not null               |
+| prefecture          | string    | not null               |
+| city                | string    | not null               |
+| street              | string    | not null               |
+| building            | string    | not null               |
+| phone               | integer   | not null               |
+
+###Association
+belongs_to :purchase
