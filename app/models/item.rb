@@ -18,7 +18,6 @@ class Item < ApplicationRecord
   validates :price,
             numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'は半角数字で¥300〜¥9,999,999の間で設定してください' }
-  validates :user, presence: { message: 'が必要です' }
 
   belongs_to :user
   has_one_attached :image
