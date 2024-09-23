@@ -1,19 +1,23 @@
-// Import and register all your controllers from the importmap via controllers/**/*_controller
-import { application } from "controllers/application"
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+function calculation() {
+  const itemPriceInput = document.getElementById('item-price')
+  const addTaxPrice = document.getElementById('add-tax-price')
+  const profit = document.getElementById('profit')
 
-function calculation(){
-  const showTheCost = document.getElementById('item-price').addEventListener('input', function(){
-    const price = parseInt(this.value)
-    const feePercentage = 0.1
-    const fee = price * feePercentage
-    const profit = price - fee
+  if (itemPriceInput && addTaxPrice && profit) {
+    itemPriceInput.addEventListener('input', function() {
+      const price = parseInt(this.value)
+      if (!isNaN(price)) {
+        const feePercentage = 0.1
+        const fee = price * feePercentage
+        const profitValue = price - fee
 
-    document.getElementById('add-tax-price').textContent = Math.floor(fee)
-    document.getElementById('profit').textContent = Math.floor(profit)
-  })
+        addTaxPrice.textContent = Math.floor(fee)
+        profit.textContent = Math.floor(profitValue)
+      } else {
+        addTaxPrice.textContent = ''
+        profit.textContent = ''
+      }
+    })
+  }
 }
-
-
-window.addEventListener("load", calculation)
+document.addEventListener("turbo:load", calculation)
