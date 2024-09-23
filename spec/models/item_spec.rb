@@ -86,6 +86,12 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('Price は半角数字で¥300〜¥9,999,999の間で設定してください')
         end
       end
+
+      it 'userが紐づいていない状態では出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User が必要です')
+      end
     end
   end
 end

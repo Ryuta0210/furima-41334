@@ -15,10 +15,10 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1, message: 'を選択してください' }
   validates :delivery_schedule_id, numericality: { other_than: 1, message: 'を選択してください' }
   validates :price, presence: { message: 'を入力してください' }
-  validates :price, format: { with: /\A\d+\z/, message: 'は半角の数字で入力してください' }
   validates :price,
-            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'は半角数字で¥300〜¥9,999,999の間で設定してください' }
+  validates :user, presence: { message: 'が必要です' }
 
   belongs_to :user
   has_one_attached :image
