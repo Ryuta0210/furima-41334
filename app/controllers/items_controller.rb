@@ -14,13 +14,28 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      Rails.logger.debug @item.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
     @item = Item.find(params[:id])
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+    return if current_user.id == @item.user_id
+
+    redirect_to root_path
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
