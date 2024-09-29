@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path if @item.sold_out
     return if current_user.id == @item.user_id
 
     redirect_to root_path

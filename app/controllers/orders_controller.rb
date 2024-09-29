@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   def index
     @item = Item.find(params[:item_id])
+    redirect_to root_path if @item.sold_out
+    redirect_to root_path if @item.user_id == current_user.id
     @order_destination = OrderDestination.new
   end
 
