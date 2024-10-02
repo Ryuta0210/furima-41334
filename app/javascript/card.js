@@ -11,9 +11,6 @@ const pay = () => {
   cvcElement.mount("#cvc-form")
 
   const form = document.getElementById('charge-form')
-    
-
-
   form.addEventListener("submit", (e)=> {
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
