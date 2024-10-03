@@ -36,7 +36,7 @@ has_one :purchase
 belongs_to :user
 
 
-## Ordersテーブル
+## Purchasesテーブル
 | Column              | Type      | Options                       |
 |---------------------|-----------|-------------------------------|
 | item                | references| null:false, foreign_key:true  |
@@ -57,7 +57,7 @@ belongs_to :user
 | street              | string    | null:false                    |
 | building            | string    |                               |
 | phone               | string    | null:false                    |
-| order               | references| null:false, foreign_key:true  |
+| purchase            | references| null:false, foreign_key:true  |
 
 ### Association
-belongs_to :order
+belongs_to :purchase
