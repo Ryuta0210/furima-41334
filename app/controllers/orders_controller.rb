@@ -4,8 +4,9 @@ class OrdersController < ApplicationController
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    redirect_to root_path if @item.sold_out
-    redirect_to root_path if @item.user_id == current_user.id
+    redirect_to root_path and return if @item.sold_out
+    redirect_to root_path and return if @item.user_id == current_user.id
+
     @order_destination = OrderDestination.new
   end
 
