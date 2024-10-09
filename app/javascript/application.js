@@ -2,5 +2,5 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "index"
-import "card"
 import "like"
+import "card"
