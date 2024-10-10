@@ -71,17 +71,17 @@
       </tbody>
     </table>
     <div class="option">
-      <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り 0</span>
-      </div>
+      <%= link_to item_like_path(@item), data: {turbo_method: :post}, id: "like-button", class: "favorite-btn" do %>
+      <%= image_tag "star.png", class: "favorite-star-icon", width: "20", height: "20", id: "favorite-star-icon" %>
+      <span id="likes-count"><%= @item.likes_count %> いいね</span> 
+      <% end %>
+
       <div class="report-btn">
         <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
         <span>不適切な商品の通報</span>
       </div>
     </div>
   </div>
-  <%# /商品の概要 %>
 
   <div class="comment-box">
     <form>
