@@ -4,8 +4,8 @@ class LikesController < ApplicationController
   def create
     @like = Like.new(user_id: current_user.id, item_id: @item.id)
     if @like.save
-      @item.increment!(:likes_count) # いいね数を増やす
-      render json: { likes_count: @item.likes_count } # 成功時にいいね数をJSONで返す
+      @item.increment!(:likes_count)
+      render json: { likes_count: @item.likes_count }
     else
       render json: { error: 'いいねできませんでした' }, status: :unprocessable_entity
     end
