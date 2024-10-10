@@ -1,7 +1,10 @@
 class LikesController < ApplicationController
   before_action :set_item
+  before_action :authenticate_user!
 
   def create
+    return if Like.exists?(user_id: current_user.id, item_id: @item.id)
+
     @like = Like.new(user_id: current_user.id, item_id: @item.id)
     if @like.save
       @item.increment!(:likes_count)
