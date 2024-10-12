@@ -184,6 +184,42 @@
   margin: 10px 5px 0 0;
 }
 
+.comments{
+  width: 40vw;
+}
+
+.comments_title{
+  text-align: center;
+  height: 30px;
+  font-size: 20px;
+  background-color: #3CCACE;
+  color: white;
+}
+
+.comment_contents{
+  overflow: auto;
+  height: 200px;
+}
+
+.comment{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  height: 60px;
+  overflow: auto;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment_content{
+  margin-left: 15px;
+}
+
+.comment_user{
+  font-size: 10px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
 .links {
   display: flex;
   justify-content: space-between;
@@ -205,3 +241,4 @@
   font-weight: bold;
   font-size: 23px;
 }
+

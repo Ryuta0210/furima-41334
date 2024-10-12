@@ -23,6 +23,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   has_one :order
   has_many :likes
+  has_many :comments
 
   def sold_out
     Order.exists?(item_id: id)

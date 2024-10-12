@@ -84,8 +84,9 @@
   </div>
 
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
+    <%= form_with model: [@item, @comment], local: true do |f| %>
+    <%= f.text_area :content, class:"comment-text" %>
+
       <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
@@ -95,8 +96,21 @@
         <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
         <span>コメントする<span>
       </button>
-    </form>
+    <% end %>
   </div>
+
+  <div class="comments">
+    <div class="comments_title"><p>コメント一覧</p></div>
+    <div class="comment_contents">
+      <% @comments.each do |comment|%>
+      <div class="comment">
+        <div class="comment_content"><%= comment.content %></div>
+        <div class="comment_user">投稿者： <%= comment.user.nickname %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="links">
     <a href="#" class="change-item-btn">
       ＜ 前の商品
