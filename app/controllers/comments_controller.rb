@@ -3,14 +3,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @item.comments.new(comment_params)
-    if @comment.save
-      redirect_to item_path(@item)
-    else
-    end
+    @comment.save
+    redirect_to item_path(@item)
+    render json: { post: }
   end
 
   def destroy
-    @comment = @item.comments.find(params[:id]) # コメントのIDを使って取得
+    @comment = @item.comments.find(params[:id])
     @comment.destroy
   end
 

@@ -84,8 +84,8 @@
   </div>
 
   <div class="comment-box">
-    <%= form_with model: [@item, @comment], local: true do |f| %>
-    <%= f.text_area :content, class:"comment-text" %>
+    <%= form_with model: [@item, @comment],method: :post, id:"comment_form" do |f| %>
+    <%= f.text_area :content, class:"comment-text", id:"comment-text" %>
 
       <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
@@ -99,6 +99,7 @@
     <% end %>
   </div>
 
+  <div id= "comments_index">
   <div class="comments">
     <div class="comments_title"><p>コメント一覧</p></div>
     <div class="comment_contents">
@@ -109,6 +110,7 @@
       </div>
       <% end %>
     </div>
+  </div>
   </div>
 
   <div class="links">
