@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :items do
     resource :like, only:[:create, :destroy]
     resources :orders
+    resources :comments
+    
   end
 end

@@ -21,6 +21,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = Comment.order(updated_at: :desc)
   end
 
   def edit
@@ -51,7 +53,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:comments).find(params[:id])
   end
 
   def verification_user
