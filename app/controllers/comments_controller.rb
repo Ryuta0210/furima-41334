@@ -15,7 +15,11 @@ class CommentsController < ApplicationController
     render json: { comments: @comments.as_json(include: { user: { only: [:nickname] } }) }
   end
 
-  def edit
+  def update
+    @comment = @item.comments.find(params[:id]) 
+    @comment.update(comment_params)
+    @comments = @item.comments.includes(:user).order(created_at: :desc)
+    render json: { comments: @comments.as_json(include: { user: { only: [:nickname] } }) }
   end
 
   private

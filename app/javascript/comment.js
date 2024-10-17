@@ -1,3 +1,9 @@
+function getCsrfToken() {
+  const metaTag = document.querySelector('meta[name="csrf-token"]');
+  return metaTag ? metaTag.getAttribute('content') : null;
+}
+
+
 const comment = () => {
   const commentForm = document.getElementById("comment_form");
   if (!commentForm) return;
@@ -24,7 +30,7 @@ const comment = () => {
     comments.forEach(comment => {
       const isCurrentUser = currentUserId && parseInt(currentUserId) === comment.user_id;
       const commentHtml = `
-         <div class="comment" data-comment-id="${comment.id}">
+       <div class="comment" data-comment-id="${comment.id}" data-user-nickname="${comment.user.nickname}">
             <div class="comment_content">${comment.content}</div>
             <div class="comment_right">
               <div class="comment_user">投稿者： ${comment.user.nickname}</div>
@@ -105,13 +111,14 @@ const comment = () => {
     const XHR = new XMLHttpRequest();
     const itemId = commentForm.dataset.itemId;
     XHR.open("PATCH", `/items/${itemId}/comments/${commentId}`, true);
-    XHR.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').content);
-    XHR.responseType = "json";
-    XHR.send(JSON.stringify({ content: updatedContent }));
 
+    XHR.setRequestHeader("Content-Type", "application/json");
+    XHR.setRequestHeader("X-CSRF-Token", getCsrfToken());     
+    XHR.responseType = "json";
+    XHR.send(JSON.stringify({ comment: { content: updatedContent }  }));
     XHR.onload = () => {
       const comments = XHR.response.comments;
-      updateCommentsDisplay(comments);
+      updateCommentsDisplay(comments, itemId);
     };
   };
 
@@ -120,7 +127,7 @@ const comment = () => {
     const originalHtml = `
       <div class="comment_content">${originalContent}</div>
       <div class="comment_right">
-        <div class="comment_user">投稿者： ${commentElement.querySelector(".comment_user").innerText}</div>
+      <div class="comment_user">投稿者： ${commentElement.dataset.userNickname}</div>
         <div class="comment_edit_delete">
           <a href="#" class="comment_edit" data-comment-id="${commentElement.dataset.commentId}" data-comment-content="${originalContent}">編集</a>
           <a href="#" class="comment_delete" data-comment-id="${commentElement.dataset.commentId}">削除</a>
@@ -137,3 +144,4 @@ const comment = () => {
 };
 
 window.addEventListener("turbo:load", comment);
+

@@ -106,7 +106,7 @@
     <div class="comments_title"><p>コメント一覧</p></div>
     <div class="comment_contents">
       <% @comments.each do |comment| %>
-        <div class="comment" data-comment-id="<%= comment.id %>">
+        <div class="comment" data-comment-id="<%= comment.id %>" data-user-nickname="<%= comment.user.nickname%>">
           <div class="comment_content"><%= comment.content %></div>
           <div class="comment_right">
             <div class="comment_user">投稿者： <%= comment.user.nickname %></div>
