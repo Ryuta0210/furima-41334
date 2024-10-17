@@ -57,7 +57,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  # config.assets.quiet = true
 
   # Assets-related configurations
   config.assets.debug = true  # Enable individual asset file loading
