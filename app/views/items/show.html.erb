@@ -71,10 +71,11 @@
       </tbody>
     </table>
     <div class="option">
-      <%= link_to item_like_path(@item), data: {turbo_method: :post}, id: "like-button", class: "favorite-btn" do %>
+      <%= link_to item_like_path(@item), data: { turbo_method: :post }, id: "like-button", class: "favorite-btn" do %>
       <%= image_tag "star.png", class: "favorite-star-icon", width: "20", height: "20", id: "favorite-star-icon" %>
-      <span id="likes-count"><%= @item.likes_count %> いいね</span> 
+      <span id="likes-count"><%= @item.likes_count %> いいね</span>
       <% end %>
+      
 
       <div class="report-btn">
         <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>

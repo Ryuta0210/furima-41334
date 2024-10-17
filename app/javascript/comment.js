@@ -69,7 +69,6 @@ const comment = () => {
     });
   };
 
-  // 編集イベントリスナーの追加
   const addEditEventListeners = () => {
     const editLinks = document.querySelectorAll(".comment_edit");
     editLinks.forEach(link => {
@@ -89,7 +88,7 @@ const comment = () => {
         `;
         commentElement.innerHTML = editFormHtml;
 
-        // 保存ボタンのイベントリスナー
+
         const saveButton = commentElement.querySelector(".save_comment");
         const cancelButton = commentElement.querySelector(".cancel_edit");
 
@@ -98,7 +97,6 @@ const comment = () => {
           updateComment(commentId, updatedContent);
         });
 
-        // 元に戻すボタンのイベントリスナー
         cancelButton.addEventListener("click", () => {
           revertToOriginalComment(commentElement, commentContent);
         });
@@ -106,7 +104,6 @@ const comment = () => {
     });
   };
 
-  // コメントの更新
   const updateComment = (commentId, updatedContent) => {
     const XHR = new XMLHttpRequest();
     const itemId = commentForm.dataset.itemId;
@@ -122,7 +119,6 @@ const comment = () => {
     };
   };
 
-  // 元に戻す機能
   const revertToOriginalComment = (commentElement, originalContent) => {
     const originalHtml = `
       <div class="comment_content">${originalContent}</div>
@@ -139,7 +135,7 @@ const comment = () => {
     addDeleteEventListeners();
   };
 
-  addDeleteEventListeners(); // 最初に削除イベントリスナーを追加
+  addDeleteEventListeners();
   addEditEventListeners()
 };
 

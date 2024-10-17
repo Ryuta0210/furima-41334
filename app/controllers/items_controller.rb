@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = Comment.order(updated_at: :desc)
+    render 
   end
 
   def edit
