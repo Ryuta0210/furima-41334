@@ -4,19 +4,24 @@ class CommentsController < ApplicationController
   def create
     @comment = @item.comments.new(comment_params)
     @comment.save
-    redirect_to item_path(@item)
-    render json: { post: }
+    @comments = @item.comments.includes(:user).order(created_at: :desc)
+    render json: { comments: @comments.as_json(include: { user: { only: [:nickname] } }) }
   end
 
   def destroy
-    @comment = @item.comments.find(params[:id])
+    @comment = @item.comments.includes(:user).find(params[:id])
     @comment.destroy
+    @comments = @item.comments.includes(:user).order(created_at: :desc)
+    render json: { comments: @comments.as_json(include: { user: { only: [:nickname] } }) }
+  end
+
+  def edit
   end
 
   private
 
   def set_item
-    @item = Item.find(params[:item_id])
+    @item = Item.includes(:comments).find(params[:item_id])
   end
 
   def comment_params

@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:comments).find(params[:id])
   end
 
   def verification_user
